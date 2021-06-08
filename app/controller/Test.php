@@ -1,8 +1,10 @@
 <?php
 
-use Shini\system\controller\Controller as Shini_Controller;
+use Sapling\system\controller\Controller as Sapling_Controller;
 
-class Test extends Shini_Controller
+defined("SAFE") or die("Direct access to scripts are not allowed.");
+
+class Test extends Sapling_Controller
 {
     public function __construct()
     {

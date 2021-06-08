@@ -2,6 +2,8 @@
 
 namespace Sapling\system\controller;
 
+defined("SAFE") or die("Direct access to scripts are not allowed.");
+
 use Sapling\config\Directories;
 
 /**

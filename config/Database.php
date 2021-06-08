@@ -2,6 +2,7 @@
 
 namespace Sapling\config;
 
+defined("SAFE") or die("Direct access to scripts are not allowed.");
 /**
  *  @Author: ShiniDev
  *  @File Created: June 5, 2021

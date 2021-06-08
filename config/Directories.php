@@ -2,6 +2,7 @@
 
 namespace Sapling\config;
 
+defined("SAFE") or die("Direct access to scripts are not allowed.");
 /**
  *  @Author: ShiniDev
  *  @File Created: June 8, 2021
@@ -17,7 +18,7 @@ namespace Sapling\config;
  */
 class Directories
 {
-    public const APP_VIEW = "app" . SEP . "view" . SEP;
-    public const APP_MODEL = "app" . SEP . "model" . SEP;
-    public const APP_CONTROLLER = "app" . SEP . "controller" . SEP;
+    public const APP_VIEW = APP_PATH . "view" . SEP;
+    public const APP_MODEL = APP_PATH . "model" . SEP;
+    public const APP_CONTROLLER = APP_PATH . "controller" . SEP;
 }

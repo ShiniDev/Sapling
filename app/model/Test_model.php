@@ -1,8 +1,10 @@
 <?php
 
-use Shini\system\model\Model as Shini_Model;
+use Sapling\system\model\Model as Sapling_Model;
 
-class Test_model extends Shini_Model
+defined("SAFE") or die("Direct access to scripts are not allowed.");
+
+class Test_model extends Sapling_Model
 {
     public function __construct()
     {
