@@ -2,7 +2,7 @@
 <h2>Author</h2>
 <p>ShiniDev</p>
 <h2>Description</h2>
-<h3>What is Sapling?<h3>
+<h3>What is Sapling?</h3>
 <p>
 Sapling is a tiny php framework, to be implemented by ShiniDev for learning
 purposes. Sapling represents his characteristics which is to grow</p>
