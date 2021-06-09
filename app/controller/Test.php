@@ -1,39 +1,39 @@
 <?php
 
-use Sapling\system\controller\Controller as Sapling_Controller;
+use Sapling\system\controller\Controller as SaplingController;
 
 defined("SAFE") or die("Direct access to scripts are not allowed.");
 
-class Test extends Sapling_Controller
+class Test extends SaplingController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load_model('Test_model');
+        $this->loadModel('TestModel');
     }
     public function index($data)
     {
-        $this->load_view("index.php", $data);
+        $this->loadView("index.php", $data);
     }
     public function table($data)
     {
-        $data['table'] = $this->Test_model->get_all_test();
-        $this->load_view("table.php", $data);
+        $data['table'] = $this->TestModel->getAllTest();
+        $this->loadView("table.php", $data);
     }
     public function insert()
     {
-        $this->Test_model->insert_test(['Mark', '09', 'PPC', 'PH']);
+        $this->TestModel->insertTest(['Mark', '09', 'PPC', 'PH']);
     }
     public function delete()
     {
-        $this->Test_model->delete_test('test_id', 3);
+        $this->TestModel->deleteTest('test_id', 3);
     }
-    public function delete_many()
+    public function deleteMany()
     {
-        $this->Test_model->delete_many_test(['test_id', 'test_id'], [2, 4], false);
+        $this->TestModel->deleteManyTest(['test_id', 'test_id'], [2, 4], false);
     }
     public function update()
     {
-        $this->Test_model->update_test(['language'], ['C++, PHP'], "test_id", 1);
+        $this->TestModel->updateTest(['language'], ['C++, PHP'], "test_id", 1);
     }
 }

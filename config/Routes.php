@@ -22,19 +22,3 @@ class Routes
     public const CUSTOM_ERROR_LOCATION = SYSTEM_PATH . "core" . SEP . "errors" . SEP;
     public const DEFAULT_CUSTOM_ERROR_LOCATION = SYSTEM_PATH . "core" . SEP . "errors" . SEP;
 }
-/**
- *  Get the url parameters and sanitize them to usable code
- */
-$sap['controller'] = ucfirst($_REQUEST['controller'] ?? Routes::DEFAULT_CONTROLLER);
-$sap['function'] = $_REQUEST['func'] ?? Routes::DEFAULT_FUNCTION;
-$sap['function'] = $sap['function'] === "" ? Routes::DEFAULT_FUNCTION : $sap['function'];
-if (!isset($sap['parameters']))
-{
-    $sap['parameters'] = [];
-}
-else
-{
-    $sap['parameters'] = explode('/', $_REQUEST['param']); // Sanitize url parameters
-    $sap['parameters'] = array_filter($sap['parameters'], 'strlen'); // Filter empty array values
-    $sap['parameters'] = array_values($sap['parameters']); // Readjust index value
-}

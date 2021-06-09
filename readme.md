@@ -24,7 +24,7 @@ you can call, <code>$this->get("table_name", ["column_1", "column_2"...])</code>
 the data that you want to insert to the table <h4>Delete</h4>
 Delete specific row, <code>$this->delete("table_name", $column_field,
 $column_value)</code>, to have multiple deletions you can call,
-<code>$this->delete_many("table_name", $columns, $values, $use_and)</code>, the
+<code>$this->deleteMany("table_name", $columns, $values, $use_and)</code>, the
 fourth parameter decides wether to use OR or AND to the where clauses. 
 <h4>Update</h4> <code>$this->update("table_name", $update_column, $update_value,
 $where_column, $where_value)</code><br>
@@ -49,12 +49,12 @@ numerically indexed.</p>
 <h3>Controller Functions</h3>
 <h4>Loading a model class</h4>
 <p>You can load model class through the function
-<code>$this->load_model("Model_name")</code>, which then the model functions can be
-accessed using,<code>$this->Model_name->function()</code></p>
+<code>$this->loadModel("ModelName")</code>, which then the model functions can be
+accessed using,<code>$this->ModelName->function()</code></p>
 <h4>Loading a view page </h4>
 <p>You can load view page through the function
-<code>$this->load_view("view_page", $your_data)</code>.</p>
-<p><b>Note: that the load_view function can only load .php files</b></p>
+<code>$this->loadView("view_page", $your_data)</code>.</p>
+<p><b>Note: that the loadView function can only load .php files</b></p>
 <h2>Current Features</h2>
 <ul>
     <li>Basic url routing</li>

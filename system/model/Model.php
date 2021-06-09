@@ -31,12 +31,9 @@ class Model
             PDO::ATTR_EMULATE_PREPARES      => false,
         ];
         $dsn = "mysql:host=" . Database::HOST . ";dbname=" . Database::DATABASE . ";charset=" . Database::CHARSET;
-        try
-        {
+        try {
             $this->db = new PDO($dsn, Database::NAME, Database::PASSWORD, $attributes);
-        }
-        catch (\PDOException $e)
-        {
+        } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
@@ -45,14 +42,11 @@ class Model
      *  
      *  This function is just a try catch wrapper for a default prep exec process
      */
-    protected function prep_exec(string $prep_query, array $values): PDOStatement|bool
+    protected function prepExec(string $prep_query, array $values): PDOStatement|bool
     {
-        try
-        {
+        try {
             return $this->db->prepare($prep_query)->execute($values);
-        }
-        catch (\PDOException $e)
-        {
+        } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
@@ -63,12 +57,9 @@ class Model
      */
     protected function query(string $query): PDOStatement|bool
     {
-        try
-        {
+        try {
             return $this->db->query($query);
-        }
-        catch (\PDOException $e)
-        {
+        } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
@@ -85,15 +76,11 @@ class Model
     protected function get(string $table, array $columns = null): PDOStatement|bool
     {
         $query = "SELECT ";
-        if ($columns != null)
-        {
-            for ($i = 0; $i < count($columns); ++$i)
-            {
+        if ($columns != null) {
+            for ($i = 0; $i < count($columns); ++$i) {
                 $query .= $i + 1 < count($columns) ? strval($columns[$i]) . ", " : strval($columns[$i]) . " ";
             }
-        }
-        else
-        {
+        } else {
             $query .= " * ";
         }
         $query .= " FROM `$table`";
@@ -114,18 +101,14 @@ class Model
     {
         $num_fields = $this->get($table)->columnCount();
         $query = "INSERT INTO `$table` VALUES (";
-        for ($i = 0; $i < $num_fields; ++$i)
-        {
-            if ($i == 0 && $has_id)
-            {
+        for ($i = 0; $i < $num_fields; ++$i) {
+            if ($i == 0 && $has_id) {
                 $query .= "NULL,";
-            }
-            else
-            {
+            } else {
                 $query .= $i + 1 < $num_fields ? "?," : "?)";
             }
         }
-        return $this->prep_exec($query, $data);
+        return $this->prepExec($query, $data);
     }
     /**
      *  Delete
@@ -140,7 +123,7 @@ class Model
     {
         $query = "DELETE FROM `$table` WHERE ";
         $query .= $column_identifier . " = ?";
-        return $this->prep_exec($query, [$column_value]);
+        return $this->prepExec($query, [$column_value]);
     }
     /**
      *  Delete Many
@@ -155,16 +138,15 @@ class Model
      *  @param bool $use_and Flag to use AND or OR statements
      *  @return PDOStatement|bool
      */
-    protected function delete_many(string $table, array $column_identifier, array $column_value, bool $use_and = true): PDOStatement|bool
+    protected function deleteMany(string $table, array $column_identifier, array $column_value, bool $use_and = true): PDOStatement|bool
     {
         $query = "DELETE FROM `$table` WHERE ";
         $logical = $use_and ? "AND" : "OR";
-        for ($i = 0; $i < count($column_identifier); ++$i)
-        {
+        for ($i = 0; $i < count($column_identifier); ++$i) {
             $query .= $column_identifier[$i] . " = ? ";
             $query .= $i + 1 < count($column_identifier) ? $logical . " " : "";
         }
-        return $this->prep_exec($query, $column_value);
+        return $this->prepExec($query, $column_value);
     }
     /**
      *  Update
@@ -182,14 +164,13 @@ class Model
     protected function update(string $table, array $update_column, array $update_value, string $where_column, $where_value): PDOStatement|bool
     {
         $query = "UPDATE `$table` SET ";
-        for ($i = 0; $i < count($update_column); ++$i)
-        {
+        for ($i = 0; $i < count($update_column); ++$i) {
             $query .= $update_column[$i] . " = ?";
             $query .= $i + 1 < count($update_column) ? ", " : " ";
         }
         $query .= "WHERE $where_column = ?";
         $data = $update_value;
         array_push($data, $where_value);
-        return $this->prep_exec($query, $data);
+        return $this->prepExec($query, $data);
     }
 }

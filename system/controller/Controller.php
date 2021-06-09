@@ -28,27 +28,21 @@ class Controller
      * 
      *  Loads php files in the view directory.
      */
-    public function load_view(string $view_dir, array $data)
+    public function loadView(string $view_dir, array $data)
     {
         if (!preg_match("#^([a-zA-Z_\-]+).php$#", $view_dir)) // String has no .php extension
         {
             $view_dir .= '.php';
         }
-        if (file_exists(Directories::APP_VIEW . $view_dir))
-        {
+        if (file_exists(Directories::APP_VIEW . $view_dir)) {
             require_once Directories::APP_VIEW . $view_dir;
-        }
-        else
-        {
+        } else {
             // Loads error page if the view file does not exist
             // Loads the custom error page if set by user
             // Else loads the default error page
-            if (Routes::CUSTOM_ERROR_LOCATION != Routes::DEFAULT_CUSTOM_ERROR_LOCATION && file_exists(Routes::CUSTOM_ERROR_LOCATION))
-            {
+            if (Routes::CUSTOM_ERROR_LOCATION != Routes::DEFAULT_CUSTOM_ERROR_LOCATION && file_exists(Routes::CUSTOM_ERROR_LOCATION)) {
                 require_once Routes::CUSTOM_ERROR_LOCATION;
-            }
-            else
-            {
+            } else {
                 require_once Routes::ERROR_PAGE_LOCATION;
             }
         }
@@ -58,14 +52,13 @@ class Controller
      * 
      *  Loads model class in the model directory
      */
-    public function load_model(string $model_dir)
+    public function loadModel(string $model_dir)
     {
         if (!preg_match("#^([a-zA-Z_\-]+).php$#", $model_dir)) // String has no .php extension
         {
             $model_dir .= '.php';
         }
-        if (file_exists(Directories::APP_MODEL . $model_dir))
-        {
+        if (file_exists(Directories::APP_MODEL . $model_dir)) {
             require_once Directories::APP_MODEL . $model_dir;
             $filename = explode('/', $model_dir);
             $filename = preg_replace("#(.php)#", "", $filename); // Remove .php extension
@@ -81,8 +74,7 @@ class Controller
     // Get properties from the $data array
     public function __get($name)
     {
-        if (array_key_exists($name, $this->data))
-        {
+        if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
         $trace = debug_backtrace();
