@@ -21,11 +21,11 @@
             <?php
             foreach ($data['table'] as $row) :
                 print '<tr>';
-                print '<td>' . $row['test_id'] . '</td>';
-                print '<td>' . $row['name'] . '</td>';
-                print '<td>' . $row['phone'] . '</td>';
-                print '<td>' . $row['address'] . '</td>';
-                print '<td>' . $row['language'] . '</td>';
+                print '<td>' . ($row['test_id'] ?? "") . '</td>';
+                print '<td>' . ($row['name'] ?? "") . '</td>';
+                print '<td>' . ($row['phone'] ?? "") . '</td>';
+                print '<td>' . ($row['address'] ?? "") . '</td>';
+                print '<td>' . ($row['language'] ?? "") . '</td>';
                 print '</tr>';
             endforeach
             ?>

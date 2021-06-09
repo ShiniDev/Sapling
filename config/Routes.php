@@ -18,7 +18,9 @@ class Routes
 {
     public const DEFAULT_CONTROLLER = 'Test';
     public const DEFAULT_FUNCTION = 'index';
-    public const ERROR_PAGE_LOCATION = SYSTEM_PATH . "core" . SEP . "error.php";
+    public const ERROR_PAGE_LOCATION = SYSTEM_PATH . "core" . SEP . "errors" . SEP . "default_error.php";
+    public const CUSTOM_ERROR_LOCATION = SYSTEM_PATH . "core" . SEP . "errors" . SEP;
+    public const DEFAULT_CUSTOM_ERROR_LOCATION = SYSTEM_PATH . "core" . SEP . "errors" . SEP;
 }
 /**
  *  Get the url parameters and sanitize them to usable code

@@ -5,6 +5,7 @@ namespace Sapling\system\controller;
 defined("SAFE") or die("Direct access to scripts are not allowed.");
 
 use Sapling\config\Directories;
+use Sapling\config\Routes;
 
 /**
  *  @Author: ShiniDev
@@ -29,9 +30,27 @@ class Controller
      */
     public function load_view(string $view_dir, array $data)
     {
+        if (!preg_match("#^([a-zA-Z_\-]+).php$#", $view_dir)) // String has no .php extension
+        {
+            $view_dir .= '.php';
+        }
         if (file_exists(Directories::APP_VIEW . $view_dir))
         {
             require_once Directories::APP_VIEW . $view_dir;
+        }
+        else
+        {
+            // Loads error page if the view file does not exist
+            // Loads the custom error page if set by user
+            // Else loads the default error page
+            if (Routes::CUSTOM_ERROR_LOCATION != Routes::DEFAULT_CUSTOM_ERROR_LOCATION && file_exists(Routes::CUSTOM_ERROR_LOCATION))
+            {
+                require_once Routes::CUSTOM_ERROR_LOCATION;
+            }
+            else
+            {
+                require_once Routes::ERROR_PAGE_LOCATION;
+            }
         }
     }
     /**
@@ -41,7 +60,7 @@ class Controller
      */
     public function load_model(string $model_dir)
     {
-        if (!preg_match("#^([a-zA-Z_\-]+).php$#", $model_dir))
+        if (!preg_match("#^([a-zA-Z_\-]+).php$#", $model_dir)) // String has no .php extension
         {
             $model_dir .= '.php';
         }
@@ -49,9 +68,9 @@ class Controller
         {
             require_once Directories::APP_MODEL . $model_dir;
             $filename = explode('/', $model_dir);
-            $filename = preg_replace("#(.php)#", "", $filename);
+            $filename = preg_replace("#(.php)#", "", $filename); // Remove .php extension
             $filename = $filename[count($filename) - 1]; // Get file name
-            $this->data[$filename] = new $filename;
+            $this->data[$filename] = new $filename; // Instantiate
         }
     }
     // Set properties dynamically
