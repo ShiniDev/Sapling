@@ -78,7 +78,7 @@ class Model
         $query = "SELECT ";
         if ($columns != null) {
             for ($i = 0; $i < count($columns); ++$i) {
-                $query .= $i + 1 < count($columns) ? strval($columns[$i]) . ", " : strval($columns[$i]) . " ";
+                $query .= $i + 1 < count($columns) ? $this->db->quote(strval($columns[$i])) . ", " : $this->db->quote(strval($columns[$i])) . " ";
             }
         } else {
             $query .= " * ";
@@ -122,7 +122,7 @@ class Model
     protected function delete(string $table, string $column_identifier, $column_value): PDOStatement|bool
     {
         $query = "DELETE FROM `$table` WHERE ";
-        $query .= $column_identifier . " = ?";
+        $query .= $this->db->quote($column_identifier) . " = ?";
         return $this->prepExec($query, [$column_value]);
     }
     /**
@@ -143,7 +143,7 @@ class Model
         $query = "DELETE FROM `$table` WHERE ";
         $logical = $use_and ? "AND" : "OR";
         for ($i = 0; $i < count($column_identifier); ++$i) {
-            $query .= $column_identifier[$i] . " = ? ";
+            $query .= $this->db->quote($column_identifier[$i]) . " = ? ";
             $query .= $i + 1 < count($column_identifier) ? $logical . " " : "";
         }
         return $this->prepExec($query, $column_value);
@@ -165,10 +165,10 @@ class Model
     {
         $query = "UPDATE `$table` SET ";
         for ($i = 0; $i < count($update_column); ++$i) {
-            $query .= $update_column[$i] . " = ?";
+            $query .= $this->db->quote($update_column[$i]) . " = ?";
             $query .= $i + 1 < count($update_column) ? ", " : " ";
         }
-        $query .= "WHERE $where_column = ?";
+        $query .= "WHERE " . $this->db->quote($where_column) . " = ?";
         $data = $update_value;
         array_push($data, $where_value);
         return $this->prepExec($query, $data);
