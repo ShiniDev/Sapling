@@ -1,4 +1,5 @@
 RewriteEngine On
+RewriteRule ^\.ht(.*)$ [F]
 RewriteRule ^app/(.*)$ [F]
 RewriteRule ^config/(.*)$ [F]
 RewriteRule ^system/(.*)$ [F]
