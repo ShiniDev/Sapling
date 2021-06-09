@@ -15,9 +15,9 @@ defined("SAFE") or die("Direct access to scripts are not allowed.");
  */
 class Database
 {
-    public const DATABASE = "shini";
-    public const HOST = "localhost";
-    public const NAME = "root";
-    public const PASSWORD = "";
-    public const CHARSET = "utf8mb4";
+    public const DATABASE = DB_NAME;
+    public const HOST = DB_HOST_NAME;
+    public const NAME = DB_USER_NAME;
+    public const PASSWORD = DB_PASSWORD;
+    public const CHARSET = DB_CHARSET;
 }

@@ -8,6 +8,10 @@ Sapling is a tiny php framework, to be implemented by ShiniDev for learning
 purposes. Sapling represents his characteristics which is to grow</p>
 <h2>How to use?</h2>
 <h3>Installation/Usage</h3>
+<code>
+cd YourProjectDirectory<br>
+git clone https://github.com/ShiniDev/Sapling.git<br>
+</code>
 <p>You can simply copy this repository to your project path and start working.
 All the routing issues have already been taken care of by Sapling. <i>Note: It
 is assumed that you know MVC design patterns</i>, Setting the default controller
@@ -30,12 +34,27 @@ fourth parameter decides wether to use OR or AND to the where clauses.
 $where_column, $where_value)</code><br>
 For more examples you can look at my Test_model.php for all the demonstrations.
 <h3>Setting up your configurations</h3>
-<p><b>Database.php</b>, you can changed this file to match your database name, pass, etc.</p>
 <p><b>Directories.php</b>, change this if you want to change the directory
 structure of the app</p> 
 <p><b>Routes.php</b>, here you can set the default controller to call and the
 default function to call, you can also set where to redirect error pages or
 custom error pages.</p>
+<h3>Setting up your database</h3>
+<p>
+To set your database configurations you must create a database.json , this file
+will be loaded by config.php to set the constants of Database.php<br>
+Example:<br>
+<code>
+database.json<br>
+{<br>
+    "databaseName": "shini",<br>
+    "hostName": "localhost",<br>
+    "name": "root",<br>
+    "password": "",<br>
+    "charset": "utf8mb4"<br>
+}
+</code>
+</p>
 <h3>Url format</h3>
 <h4><code>server_url/Controller/Function/Params</code>..., complete url format</h4>
 <h4><code>server_url</code>, calls the default controller and default function</h4>
