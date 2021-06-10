@@ -13,7 +13,6 @@ namespace Sapling\system\config;
  *  This config sets the default controller and function for
  *  undefined values
  */
-defined("SAFE") or die("Direct access to scripts are not allowed.");
 class Routes
 {
     public const DEFAULT_CONTROLLER = 'Test';
