@@ -2,6 +2,7 @@
 
 define("SEP", DIRECTORY_SEPARATOR);
 define("BASE_PATH", dirname(dirname(__FILE__)) . SEP);
+define("PUBLIC_PATH", __DIR__ . SEP);
 define("SYSTEM_PATH", BASE_PATH . "system" . SEP);
 define("CONFIG_PATH", SYSTEM_PATH . "config" . SEP);
 define("CORE_PATH", SYSTEM_PATH . "core" . SEP);

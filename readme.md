@@ -4,8 +4,8 @@
 <h2>Description</h2>
 <h3>What is Sapling?</h3>
 <p>
-Sapling is a tiny php framework, to be implemented by ShiniDev for learning
-purposes. Sapling represents his characteristics which is to grow</p>
+Sapling is a tiny php framework implemented by ShiniDev. Sapling represents his
+characteristics which is to grow.</p>
 <h2>How to use?</h2>
 <h3>Installation/Usage</h3>
 <code>
