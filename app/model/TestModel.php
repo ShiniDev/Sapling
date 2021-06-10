@@ -1,8 +1,8 @@
 <?php
 
-use Sapling\system\model\Model as SaplingModel;
+namespace Sapling\app\model;
 
-defined("SAFE") or die("Direct access to scripts are not allowed.");
+use Sapling\system\model\Model as SaplingModel;
 
 class TestModel extends SaplingModel
 {

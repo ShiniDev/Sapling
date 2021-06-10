@@ -2,10 +2,8 @@
 
 namespace Sapling\system\controller;
 
-defined("SAFE") or die("Direct access to scripts are not allowed.");
-
-use Sapling\config\Directories;
-use Sapling\config\Routes;
+use Sapling\system\config\Directories;
+use Sapling\system\config\Routes;
 
 /**
  *  @Author: ShiniDev
@@ -63,7 +61,8 @@ class Controller
             $filename = explode('/', $model_dir);
             $filename = preg_replace("#(.php)#", "", $filename); // Remove .php extension
             $filename = $filename[count($filename) - 1]; // Get file name
-            $this->data[$filename] = new $filename; // Instantiate
+            $classfilename = "Sapling\\app\\model\\" . $filename;
+            $this->data[$filename] = new $classfilename; // Instantiate
         }
     }
     // Set properties dynamically

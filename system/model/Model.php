@@ -2,11 +2,9 @@
 
 namespace Sapling\system\model;
 
-defined("SAFE") or die("Direct access to scripts are not allowed.");
-
 use PDO;
 use PDOStatement;
-use Sapling\config\Database;
+use Sapling\system\config\Database;
 
 /**
  *  @Author: ShiniDev

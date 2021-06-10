@@ -1,6 +1,6 @@
 <?php
 
-namespace Sapling\config;
+namespace Sapling\system\config;
 
 /**
  *  @Author: ShiniDev

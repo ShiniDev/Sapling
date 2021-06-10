@@ -1,8 +1,8 @@
 <?php
 
-use Sapling\system\controller\Controller as SaplingController;
+namespace Sapling\app\controller;
 
-defined("SAFE") or die("Direct access to scripts are not allowed.");
+use Sapling\system\controller\Controller as SaplingController;
 
 class Test extends SaplingController
 {
