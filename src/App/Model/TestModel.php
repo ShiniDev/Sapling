@@ -1,8 +1,8 @@
 <?php
 
-namespace Sapling\app\model;
+namespace App\Model;
 
-use Sapling\system\model\Model as SaplingModel;
+use Sapling\Model\Model as SaplingModel;
 
 class TestModel extends SaplingModel
 {

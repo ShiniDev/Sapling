@@ -1,15 +1,10 @@
 <?php
 
-namespace Sapling\system\controller;
+namespace Sapling\Controller;
 
-use Sapling\system\config\Directories;
-use Sapling\system\config\Routes;
+use Sapling\Config\Directories;
+use Sapling\Config\Routes;
 
-/**
- *  @Author: ShiniDev
- *  @File Created: June 8, 2021
- *  @Last Edited: June 8, 2021
- */
 /**
  *  Controller Class
  * 
@@ -35,14 +30,7 @@ class Controller
         if (file_exists(Directories::APP_VIEW . $view_dir)) {
             require_once Directories::APP_VIEW . $view_dir;
         } else {
-            // Loads error page if the view file does not exist
-            // Loads the custom error page if set by user
-            // Else loads the default error page
-            if (Routes::CUSTOM_ERROR_LOCATION != Routes::DEFAULT_CUSTOM_ERROR_LOCATION && file_exists(Routes::CUSTOM_ERROR_LOCATION)) {
-                require_once Routes::CUSTOM_ERROR_LOCATION;
-            } else {
-                require_once Routes::ERROR_PAGE_LOCATION;
-            }
+            require_once Routes::DEFAULT_ERROR_PAGE;
         }
     }
     /**
@@ -57,11 +45,11 @@ class Controller
             $model_dir .= '.php';
         }
         if (file_exists(Directories::APP_MODEL . $model_dir)) {
-            require_once Directories::APP_MODEL . $model_dir;
+            // require_once Directories::APP_MODEL . $model_dir;
             $filename = explode('/', $model_dir);
             $filename = preg_replace("#(.php)#", "", $filename); // Remove .php extension
             $filename = $filename[count($filename) - 1]; // Get file name
-            $classfilename = "Sapling\\app\\model\\" . $filename;
+            $classfilename = "App\\Model\\" . $filename;
             $this->data[$filename] = new $classfilename; // Instantiate
         }
     }

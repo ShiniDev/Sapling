@@ -46,22 +46,22 @@ system/config directory, this file will be loaded by config.php to set the
 constants of Database.php<br>
 Example:<br>
 <code>
-database.json<br>
-{<br>
-    "databaseName": "shini",<br>
-    "hostName": "localhost",<br>
-    "name": "root",<br>
-    "password": "",<br>
-    "charset": "utf8mb4"<br>
+database.json
+{
+    "databaseName": "shini",
+    "hostName": "localhost",
+    "name": "root",
+    "password": "",
+    "charset": "utf8mb4"
 }
 </code>
 </p>
 <h3>Url format</h3>
-<h4><code>server_url/public/Controller/Function/Params</code>..., complete url format</h4>
-<h4><code>server_url/public</code>, calls the default controller and default function</h4>
-<h4><code>server_url/public/Controller</code>, calls the default function</h4>
-<h4><code>server_url/public/Controller/Function/Param1/Param2/Param3</code>, multiple parameter for
-a specific function</h4>
+<h4><code>server_url/Controller/Function/Params</code>..., complete url format</h4>
+<h4><code>server_url</code>, calls the default controller and default function</h4>
+<h4><code>server_url/Controller</code>, calls the default function</h4>
+<h4><code>server_url/Controller/Function/Param1/Param2/Param3</code>,
+multiple parameter for a specific function</h4>
 <h3>Important</h3>
 <p>If your controller is going to take in parameters, always make sure that
 there's only one parameter, the parameter that gets passed is an array which is

@@ -8,11 +8,14 @@
             "email": "shinideveloper18@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "symfony/http-foundation": "^5.3"
+    },
     "autoload": {
         "psr-4": {
-            "Sapling\\system\\": "system/",
-            "Sapling\\app\\": "app/"
+            "Sapling\\": "src/Sapling/",
+            "App\\": "src/App/",
+            "Sapling\\Config\\": "config/"
         }
     }
 }

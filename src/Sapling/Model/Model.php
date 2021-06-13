@@ -1,10 +1,10 @@
 <?php
 
-namespace Sapling\system\model;
+namespace Sapling\Model;
 
 use PDO;
 use PDOStatement;
-use Sapling\system\config\Database;
+use Sapling\Config\Database;
 
 /**
  *  @Author: ShiniDev
@@ -28,9 +28,11 @@ class Model
             PDO::ATTR_DEFAULT_FETCH_MODE    => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES      => false,
         ];
-        $dsn = "mysql:host=" . Database::HOST . ";dbname=" . Database::DATABASE . ";charset=" . Database::CHARSET;
+        $dsn = "mysql:host=" . Database::DB_HOST_NAME
+            . ";dbname=" . Database::DB_NAME
+            . ";charset=" . Database::DB_CHARSET;
         try {
-            $this->db = new PDO($dsn, Database::NAME, Database::PASSWORD, $attributes);
+            $this->db = new PDO($dsn, Database::DB_USER_NAME, Database::DB_PASSWORD, $attributes);
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }

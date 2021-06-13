@@ -1,8 +1,8 @@
 <?php
 
-namespace Sapling\app\controller;
+namespace App\Controller;
 
-use Sapling\system\controller\Controller as SaplingController;
+use Sapling\Controller\Controller as SaplingController;
 
 class Test extends SaplingController
 {
