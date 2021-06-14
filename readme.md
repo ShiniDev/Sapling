@@ -7,15 +7,17 @@
 Sapling is a tiny php framework implemented by ShiniDev. Sapling represents his
 characteristics which is to grow.</p>
 <h2>How to use?</h2>
-<h3>Installation/Usage</h3>
-<code>
-cd YourProjectDirectory<br>
-git clone https://github.com/ShiniDev/Sapling.git<br>
-</code>
-<p>You can simply copy this repository to your project path and start working.
-All the routing issues have already been taken care of by Sapling. <i>Note: It
-is assumed that you know MVC design patterns</i>, Setting the default controller
-is on the config section down below.</p>
+<h3>Installation</h3>
+<code>cd YourProjectDirectory</code>
+<br>
+<code>git clone https://github.com/ShiniDev/Sapling.git</code>
+<br>
+<code>cd Sapling</code>
+<br>
+<code>composer install</code>
+<br>
+<code>composer update</code>
+<br>
 <h3>Model Functions</h3>
 <p>I have set up the four basic sql queries which is select,insert,delete and
 update to use them look at the example below:<br>
