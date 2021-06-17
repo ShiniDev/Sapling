@@ -85,3 +85,7 @@ accessed using,<code>$this->ModelName->function()</code></p>
     <li>Planning, design patterns, and robust implementation</li>
     <li>And lastly, learn a lot!</li>
 </ul>
+<h2>Plans</h2>
+<ul>
+    <li>Rewrite the framework from scratch, when I have more experience</li>
+</ul>
