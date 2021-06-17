@@ -41,8 +41,10 @@ class Model
      *  Prepare and Execute
      *  
      *  This function is just a try catch wrapper for a default prep exec process
+     * 
+     * @return PDOStatement|bool
      */
-    protected function prepExec(string $prep_query, array $values): PDOStatement|bool
+    protected function prepExec(string $prep_query, array $values)
     {
         try {
             return $this->db->prepare($prep_query)->execute($values);
@@ -55,7 +57,7 @@ class Model
      * 
      *  This function is just a try catch wrapper for a default query method
      */
-    protected function query(string $query): PDOStatement|bool
+    protected function query(string $query)
     {
         try {
             return $this->db->query($query);
@@ -73,7 +75,7 @@ class Model
      *  @param array|null $columns The specific column to retrieve
      *  @return PDOStatement|bool 
      */
-    protected function get(string $table, array $columns = null): PDOStatement|bool
+    protected function get(string $table, array $columns = null)
     {
         $query = "SELECT ";
         if ($columns != null) {
@@ -97,7 +99,7 @@ class Model
      *  @param bool $has_id Set to false, if no primary key or id is specified
      *  @return PDOStatement|bool
      */
-    protected function insert(string $table, array $data, bool $has_id = true): PDOStatement|bool
+    protected function insert(string $table, array $data, bool $has_id = true)
     {
         $num_fields = $this->get($table)->columnCount();
         $query = "INSERT INTO `$table` VALUES (";
@@ -118,8 +120,9 @@ class Model
      *  @param string $table The table to delete data from
      *  @param string $column_identifier The column field to find
      *  @param string $column_value The value to match
+     *  @return PDOStatement|bool
      */
-    protected function delete(string $table, string $column_identifier, $column_value): PDOStatement|bool
+    protected function delete(string $table, string $column_identifier, $column_value)
     {
         $query = "DELETE FROM `$table` WHERE ";
         $query .= $this->db->quote($column_identifier) . " = ?";
@@ -138,7 +141,7 @@ class Model
      *  @param bool $use_and Flag to use AND or OR statements
      *  @return PDOStatement|bool
      */
-    protected function deleteMany(string $table, array $column_identifier, array $column_value, bool $use_and = true): PDOStatement|bool
+    protected function deleteMany(string $table, array $column_identifier, array $column_value, bool $use_and = true)
     {
         $query = "DELETE FROM `$table` WHERE ";
         $logical = $use_and ? "AND" : "OR";
@@ -161,7 +164,7 @@ class Model
      *  @param mixed $where_value The value of the row to find
      *  @return PDOStatement|bool
      */
-    protected function update(string $table, array $update_column, array $update_value, string $where_column, $where_value): PDOStatement|bool
+    protected function update(string $table, array $update_column, array $update_value, string $where_column, $where_value)
     {
         $query = "UPDATE `$table` SET ";
         for ($i = 0; $i < count($update_column); ++$i) {

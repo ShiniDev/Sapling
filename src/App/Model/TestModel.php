@@ -10,7 +10,7 @@ class TestModel extends SaplingModel
     {
         parent::__construct();
     }
-    public function getAllTest(): array|bool
+    public function getAllTest()
     {
         // $statement = "SELECT * FROM test";
         // return $this->query($statement)->fetchAll();
