@@ -1,2 +1,3 @@
 /config/database.json
 /vendor/
+.env

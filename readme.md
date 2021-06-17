@@ -43,20 +43,9 @@ default function to call, you can also set where to redirect error pages or
 custom error pages.</p>
 <h3>Setting up your database</h3>
 <p>
-To set your database configurations you must create a database.json in the
-system/config directory, this file will be loaded by config.php to set the
-constants of Database.php<br>
+To set up your database, look at the .envtemplate and change each lines to match your database<br>
+After that, create a copy of your modified .envtemplate and rename it to .env<br>
 Example:<br>
-<code>
-database.json
-{
-    "databaseName": "shini",
-    "hostName": "localhost",
-    "name": "root",
-    "password": "",
-    "charset": "utf8mb4"
-}
-</code>
 </p>
 <h3>Url format</h3>
 <h4><code>server_url/Controller/Function/Params</code>..., complete url format</h4>
