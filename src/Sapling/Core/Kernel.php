@@ -43,6 +43,7 @@ class Kernel
         } else {
             self::$isRunned = TRUE;
             self::set();
+            session_start();
             if (file_exists(Directories::APP_CONTROLLER . self::$controller . ".php")) {
                 self::$controller = "App\\Controller\\" . self::$controller;
                 $controller = new self::$controller;
