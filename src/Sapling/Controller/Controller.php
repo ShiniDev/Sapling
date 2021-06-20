@@ -7,23 +7,23 @@ use Sapling\Config\Routes;
 
 /**
  *  Controller Class
- * 
+ *
  *  Handles communication between views and models
  */
 class Controller
 {
     private $data = [];
-    protected function __construct()
+    public function __construct()
     {
     }
     /**
      *  Load View
-     * 
+     *
      *  Loads php files in the view directory.
      */
     public function loadView(string $view_dir, array $data)
     {
-        if (!preg_match("#^([a-zA-Z_\-]+).php$#", $view_dir)) // String has no .php extension
+        if (!preg_match("#^([a-zA-Z_\-/]+).php$#", $view_dir)) // String has no .php extension
         {
             $view_dir .= '.php';
         }
@@ -35,10 +35,10 @@ class Controller
     }
     /**
      *  Load Model
-     * 
+     *
      *  Loads model class in the model directory
      */
-    public function loadModel(string $model_dir)
+    public function loadModel(string $model_dir, ?string $name = NULL)
     {
         if (!preg_match("#^([a-zA-Z_\-]+).php$#", $model_dir)) // String has no .php extension
         {
@@ -50,6 +50,9 @@ class Controller
             $filename = preg_replace("#(.php)#", "", $filename); // Remove .php extension
             $filename = $filename[count($filename) - 1]; // Get file name
             $classfilename = "App\\Model\\" . $filename;
+            if ($name !== NULL) {
+                $filename = $name;
+            }
             $this->data[$filename] = new $classfilename; // Instantiate
         }
     }

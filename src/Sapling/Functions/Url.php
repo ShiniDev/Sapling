@@ -9,11 +9,17 @@ class Url
 {
     private static ?Request $request = NULL;
 
-    private static function createRequest()
+    private static function createRequest(): void
     {
         if (self::$request === NULL) {
             self::$request = Request::createFromGlobals();
         }
+    }
+
+    public static function resourceUrl(): string
+    {
+        self::createRequest();
+        return self::baseUrl() . "resources/";
     }
 
     public static function baseUrl(): string
