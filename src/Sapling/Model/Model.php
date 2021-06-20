@@ -77,15 +77,15 @@ class Model
      */
     protected function get(string $table, array $columns = null)
     {
-        $query = "SELECT (`";
+        $query = "SELECT `";
         if ($columns != null) {
             $query .= implode("`,`", $columns);
             $query .= "`";
         } else {
             $query .= " * ";
         }
-        $query .= ") FROM `$table`";
-        return $this->prepExec($query);
+        $query .= " FROM `$table`";
+        return $this->query($query);
     }
     /**
      *  Insert
