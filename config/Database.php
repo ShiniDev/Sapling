@@ -7,6 +7,7 @@ namespace Sapling\Config;
 class Database
 {
     public const DB = ENV["DATABASE"];
+    public const DB_TYPE = self::DB['DATABASE_TYPE'];
     public const DB_NAME = self::DB['DATABASE_NAME'];
     public const DB_HOST_NAME = self::DB['HOST_NAME'];
     public const DB_USER_NAME = self::DB['USER_NAME'];

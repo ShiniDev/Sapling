@@ -21,7 +21,7 @@ class Controller
      *
      *  Loads php files in the view directory.
      */
-    public function loadView(string $view_dir, array $data)
+    public function loadView(string $view_dir, ?array $data = null)
     {
         if (!preg_match("#^([a-zA-Z_\-/]+).php$#", $view_dir)) // String has no .php extension
         {

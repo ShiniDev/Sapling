@@ -22,6 +22,11 @@ class Url
         return self::baseUrl() . "resources/";
     }
 
+    public static function redirect(string $url): void
+    {
+        header('Location: ' . $url);
+    }
+
     public static function baseUrl(): string
     {
         self::createRequest();
@@ -67,6 +72,14 @@ class Url
             $parameters = array_filter($parameters, 'strlen');
             // Re-adjust index values, clearing empty parameters does not fix index values
             $parameters = array_values($parameters);
+            // Replace + to space
+            for ($i = 0, $len = count($parameters); $i < $len; ++$i) {
+                for ($j = 0, $lenk = strlen($parameters[$i]); $j < $lenk; ++$j) {
+                    if ($parameters[$i][$j] === '+') {
+                        $parameters[$i][$j] = ' ';
+                    }
+                }
+            }
         }
         return $parameters;
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Sapling\Controller\Controller as SaplingController;
+use Sapling\Functions\Url;
 
 class Test extends SaplingController
 {
@@ -20,20 +21,19 @@ class Test extends SaplingController
         $data['table'] = $this->TestModel->getAllTest();
         $this->loadView("table.php", $data);
     }
-    public function insert()
+    public function insert($data)
     {
-        $this->TestModel->insertTest(['Mark', '09', 'PPC', 'PH']);
+        $this->TestModel->insertTest(['name', 'phone', 'address', 'language'], [$data[0], $data[1], $data[2], $data[3]]);
+        Url::redirect(Url::baseUrl() . "test/table");
     }
-    public function delete()
+    public function delete($data)
     {
-        $this->TestModel->deleteTest('test_id', 3);
-    }
-    public function deleteMany()
-    {
-        $this->TestModel->deleteManyTest(['test_id', 'test_id'], [2, 4], false);
+        $this->TestModel->deleteTest([$data[0]], [$data[1]]);
+        Url::redirect(Url::baseUrl() . "test/table");
     }
     public function update()
     {
-        $this->TestModel->updateTest(['language'], ['C++, PHP'], "test_id", 1);
+        $this->TestModel->updateTest();
+        $this->TestModel->getLastQuery();
     }
 }

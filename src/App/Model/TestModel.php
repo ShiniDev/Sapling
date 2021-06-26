@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use Sapling\Model\Model as SaplingModel;
+use Sapling\Model\QueryBuilder as SaplingModel;
 
 class TestModel extends SaplingModel
 {
@@ -12,24 +12,25 @@ class TestModel extends SaplingModel
     }
     public function getAllTest()
     {
-        // $statement = "SELECT * FROM test";
-        // return $this->query($statement)->fetchAll();
-        return $this->get("test")->fetchAll();
+        $this->table("test");
+        $this->order('test_id', false);
+        return $this->get()->fetchAll();
     }
-    public function insertTest(array $data)
+    public function insertTest(array $columns, array $data)
     {
-        $this->insert("test", $data);
+        $this->table("test");
+        $this->insert($columns, $data);
     }
-    public function deleteTest(string $column, $value)
+    public function deleteTest(array $columns, array $values)
     {
-        $this->delete("test", $column, $value);
+        $this->table("test");
+        $this->whereMany($columns, $values);
+        $this->delete();
     }
-    public function deleteManyTest(array $columns, array $values, bool $use_and = true)
+    public function updateTest()
     {
-        $this->deleteMany("test", $columns, $values, $use_and);
-    }
-    public function updateTest(array $update_column, array $update_value, string $where_column, $where_value)
-    {
-        $this->update("test", $update_column, $update_value, $where_column, $where_value);
+        $this->table("test");
+        $this->whereMany(['test_id'], [22]);
+        $this->update(['name'], ['Angela']);
     }
 }

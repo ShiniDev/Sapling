@@ -1,4 +1,5 @@
 [DATABASE]
+DATABASE_TYPE = "mysql"
 DATABASE_NAME = "dbname"
 HOST_NAME = "localhost"
 USER_NAME = ""
