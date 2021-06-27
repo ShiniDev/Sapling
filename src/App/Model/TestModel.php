@@ -13,12 +13,20 @@ class TestModel extends SaplingModel
     public function getAllTest()
     {
         $this->table("test");
-        $this->order('test_id', false);
+        $this->order('name');
+        $this->whereSpecific("test_id", 20, "<");
+        $this->limit(100, 1);
         return $this->get()->fetchAll();
+    }
+    public function getAllHobby()
+    {
+        $this->table("test");
+        $this->join("inner", "hobbies", "test.test_id = hobbies.test_id");
+        return $this->select(['test.name', 'hobbies.hobby'], false)->fetchAll();
     }
     public function insertTest(array $columns, array $data)
     {
-        $this->table("test");
+        $this->table("hobbies");
         $this->insert($columns, $data);
     }
     public function deleteTest(array $columns, array $values)

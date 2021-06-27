@@ -15,6 +15,8 @@
                 <th>Phone Number</th>
                 <th>Address</th>
                 <th>Language</th>
+                <th>Hobby</th>
+                <th>Birthday</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +28,8 @@
                 print '<td>' . ($row['phone'] ?? "") . '</td>';
                 print '<td>' . ($row['address'] ?? "") . '</td>';
                 print '<td>' . ($row['language'] ?? "") . '</td>';
+                print '<td>' . ($row['hobby'] ?? "") . '</td>';
+                print '<td>' . ($row['birthday'] ?? "") . '</td>';
                 print '</tr>';
             endforeach
             ?>

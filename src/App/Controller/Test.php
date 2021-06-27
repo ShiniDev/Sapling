@@ -19,11 +19,18 @@ class Test extends SaplingController
     public function table($data)
     {
         $data['table'] = $this->TestModel->getAllTest();
+        echo $this->TestModel->getLastQuery();
         $this->loadView("table.php", $data);
+    }
+    public function jointable($data)
+    {
+        $data['table'] = $this->TestModel->getAllHobby();
+        echo $this->TestModel->getLastQuery();
+        $this->loadView("jointable.php", $data);
     }
     public function insert($data)
     {
-        $this->TestModel->insertTest(['name', 'phone', 'address', 'language'], [$data[0], $data[1], $data[2], $data[3]]);
+        $this->TestModel->insertTest(['test_id', 'hobby', 'birthday'], [$data[0], $data[1], $data[2]]);
         Url::redirect(Url::baseUrl() . "test/table");
     }
     public function delete($data)

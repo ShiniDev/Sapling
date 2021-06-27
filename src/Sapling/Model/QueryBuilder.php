@@ -106,7 +106,7 @@ class QueryBuilder
             Debug::debugClass("Table not set");
             return;
         }
-        $query = "SELECT * FROM `{$this->qbTable}` {$this->qbWhere['where']} {$this->qbOrder} {$this->qbLimit}";
+        $query = "SELECT * FROM `{$this->qbTable}` {$this->qbJoin} {$this->qbWhere['where']} {$this->qbOrder} {$this->qbLimit}";
         $_SESSION['QueryBuilder']['lastQuery'] = $query;
         $res = $this->prepExec($query, $this->qbWhere['values']);
         $this->clearAll();
@@ -198,7 +198,6 @@ class QueryBuilder
             $values[] = $this->qbWhere['values'][$i];
         }
         $_SESSION['QueryBuilder']['lastQuery'] = $query;
-        echo $query;
         $res = $this->prepExec($query, $values);
         $this->clearAll();
         return $res;
@@ -245,14 +244,14 @@ class QueryBuilder
     protected function join(string $joinType, string $table, string $condition)
     {
         $joinType = strtoupper($joinType);
-        if ($joinType !== "INNER" || $joinType !== "LEFT" || $joinType !== "RIGHT" || $joinType !== "OUTER") {
+        if ($joinType === "INNER" || $joinType === "LEFT" || $joinType === "RIGHT" || $joinType === "OUTER") {
+            if ($joinType === "OUTER") {
+                $joinType = "FULL OUTER";
+            }
+            $this->qbJoin .= "{$joinType} JOIN {$table} ON {$condition}";
+        } else {
             Debug::debugClass('Invalid join type');
-            return;
         }
-        if ($joinType === "OUTER") {
-            $joinType = "FULL OUTER";
-        }
-        $this->qbJoin .= "{$joinType} JOIN {$table} ON {$condition}";
     }
     /**
      *  Where Manual
@@ -262,7 +261,7 @@ class QueryBuilder
      */
     protected function whereManual(string $where, array $value)
     {
-        if (!preg_match("/?/", $where)) {
+        if (!preg_match("/[?]+/", $where)) {
             Debug::debugClass('Manual where clause must always be binded by ?');
             return;
         }
@@ -334,9 +333,9 @@ class QueryBuilder
     {
         $direction = $ascending ? "ASC" : "DESC";
         if ($this->qbOrder === "") {
-            $this->qbOrder = "ORDER BY {$column} {$direction}";
+            $this->qbOrder = "ORDER BY `{$column}` {$direction}";
         } else {
-            $this->qbOrder = ", {$column} {$direction}";
+            $this->qbOrder = ", `{$column}` {$direction}";
         }
     }
     /**
