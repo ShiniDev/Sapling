@@ -2,6 +2,7 @@
     "name": "shinidev/sapling",
     "description": "A small PHP framework that implements MVC design pattern. This framework is created with the intent to give the author knowledge about php and at the same time be usable for the community.",
     "license": "MIT",
+    "type": "project",
     "authors": [
         {
             "name": "ShiniDev",
