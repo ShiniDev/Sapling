@@ -20,5 +20,5 @@
             "Sapling\\Config\\": "config/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
