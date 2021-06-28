@@ -5,9 +5,7 @@
   time be usable for the community.
 </p>
 <h1><b>Installation</b></h1>
-<pre>git clone https://github.com/ShiniDev/Sapling.git</pre>
-<pre>composer install</pre>
-<pre>composer update</pre>
+<pre>composer create-project shinidev/sapling directory</pre>
 <h1><b>Configuration</b></h1>
 <h2><b>.envtemplate</b></h2>
 <p>
