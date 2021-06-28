@@ -3,7 +3,6 @@
 namespace Sapling\Config;
 
 // Get the database credentials from database.json
-
 class Database
 {
     public const DB = ENV["DATABASE"];

@@ -3,6 +3,7 @@
 namespace Sapling\Model;
 
 use PDO;
+use PDOStatement;
 use Sapling\Config\Database;
 use Sapling\Functions\Debug;
 
@@ -100,7 +101,7 @@ class QueryBuilder
      * 
      *  Get all column data from all rows
      */
-    protected function get()
+    protected function get(): PDOStatement
     {
         if ($this->qbTable === "") {
             Debug::debugClass("Table not set");
@@ -120,7 +121,7 @@ class QueryBuilder
      *  @param array $columns The columns to select 
      *  @param bool $backticks Disable if you're getting table data from joins
      */
-    protected function select(array $columns, bool $backticks = true)
+    protected function select(array $columns, bool $backticks = true): PDOStatement
     {
         if ($this->qbTable === "") {
             Debug::debugClass("Table not set");

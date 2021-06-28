@@ -12,11 +12,11 @@ use Sapling\Config\Database;
  *  @Last Edited: June 8, 2021
  */
 /**
- *  Model
+ *  DeprecatedModel
  *
  *  A class for communicating to the database
  */
-class Model
+class DeprecatedModel
 {
     // PDO Object
     protected $db;

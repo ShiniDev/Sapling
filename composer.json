@@ -1,6 +1,6 @@
 {
     "name": "shinidev/sapling",
-    "description": "A tiny php framework",
+    "description": "A small PHP framework that implements MVC design pattern. This framework is created with the intent to give the author knowledge about php and at the same time be usable for the community.",
     "license": "MIT",
     "authors": [
         {
@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": ">=7.4",
         "symfony/http-foundation": "^5.3"
     },
     "autoload": {
@@ -17,5 +18,6 @@
             "App\\": "src/App/",
             "Sapling\\Config\\": "config/"
         }
-    }
+    },
+    "minimum-stability": "stable"
 }

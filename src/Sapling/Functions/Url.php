@@ -47,7 +47,7 @@ class Url
     public static function getUrlController(): string
     {
         self::createRequest();
-        return ucfirst(self::$request->query->get('controller', Routes::DEFAULT_CONTROLLER));
+        return ucfirst(self::$request->query->get('controller', ""));
     }
 
     public static function getUrlFunction(): string

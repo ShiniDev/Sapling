@@ -10,35 +10,75 @@ class TestModel extends SaplingModel
     {
         parent::__construct();
     }
-    public function getAllTest()
+    public function sampleGet()
     {
-        $this->table("test");
-        $this->order('name');
-        $this->whereSpecific("test_id", 20, "<");
-        $this->limit(100, 1);
+        $this->table('table');
+        // Below shows how to set the where clause
+        // All three does the same thing
+        $this->whereManual("WHERE column = ? AND column1 = ?", [0, 1]);
+        // or
+        $this->whereSpecific('column', 0, "=");
+        $this->whereSpecific('column1', 1, "=");
+        // or
+        $this->whereMany(['column', 'column1'], [0, 1]);
+        // Example join
+        $this->join('left', 'test', 'table.id = test.id');
+        // Example ordering
+        $this->order('column');
+        // Example limit
+        $this->limit(100);
+        // Example get 
         return $this->get()->fetchAll();
     }
-    public function getAllHobby()
+    public function sampleSelect()
     {
-        $this->table("test");
-        $this->join("inner", "hobbies", "test.test_id = hobbies.test_id");
-        return $this->select(['test.name', 'hobbies.hobby'], false)->fetchAll();
+        $this->table('table');
+        // Below shows how to set the where clause
+        // All three does the same thing
+        $this->whereManual("WHERE column = ? AND column1 = ?", [0, 1]);
+        // or
+        $this->whereSpecific('column', 0, "=");
+        $this->whereSpecific('column1', 1, "=");
+        // or
+        $this->whereMany(['column', 'column1'], [0, 1]);
+        // Example join
+        $this->join('left', 'test', 'table.id = test.id');
+        // Example ordering
+        $this->order('column');
+        // Example limit
+        $this->limit(100);
+        // Example select
+        return $this->select(['column', 'column1'])->fetchAll();
     }
-    public function insertTest(array $columns, array $data)
+    public function sampleInsert()
     {
-        $this->table("hobbies");
-        $this->insert($columns, $data);
+        $this->table('table');
+        $this->insert(['columns'], [0]);
     }
-    public function deleteTest(array $columns, array $values)
+    public function sampleUpdate()
     {
-        $this->table("test");
-        $this->whereMany($columns, $values);
+        $this->table('table');
+        // Below shows how to set the where clause
+        // All three does the same thing
+        $this->whereManual("WHERE column = ? AND column1 = ?", [0, 1]);
+        // or
+        $this->whereSpecific('column', 0, "=");
+        $this->whereSpecific('column1', 1, "=");
+        // or
+        $this->whereMany(['column', 'column1'], [0, 1]);
+        $this->update(['column', 'column1'], [1, 0]);
+    }
+    public function sampleDelete()
+    {
+        $this->table('table');
+        // Below shows how to set the where clause
+        // All three does the same thing
+        $this->whereManual("WHERE column = ? AND column1 = ?", [0, 1]);
+        // or
+        $this->whereSpecific('column', 0, "=");
+        $this->whereSpecific('column1', 1, "=");
+        // or
+        $this->whereMany(['column', 'column1'], [0, 1]);
         $this->delete();
-    }
-    public function updateTest()
-    {
-        $this->table("test");
-        $this->whereMany(['test_id'], [22]);
-        $this->update(['name'], ['Angela']);
     }
 }
