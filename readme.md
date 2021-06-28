@@ -103,7 +103,7 @@
 </pre>
 <h2><b>Loading resources</b></h2>
 <h3><b>Loading a css file in a view php</b></h3>
-<pre>'<link rel="stylesheet" type="text/css" href="<?= Url::baseUrl() ?>resources/css/test.css">'</pre>
+<pre>href="<?= Url::baseUrl() ?>resources/css/test.css"</pre>
 <h3><b>Loading a js file in a view php</b></h3>
 <pre>'<script src="<?= Url::baseUrl() ?>resources/js/test.js"></script>'</pre>
 <h1><b>Notes</b></h1>
@@ -125,6 +125,6 @@
 </ul>
 <h1><b>Features to learn/add</b></h1>
 <ul>
-  <li>Better routing implementation, similar to of Laraval or Codeigniter</li>
+  <li>Better routing implementation, similar to of Laravel or Codeigniter</li>
   <li>API implementation</li>
 </ul>
