@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=7.3",
         "symfony/http-foundation": "^5.3"
     },
     "autoload": {
@@ -20,5 +20,8 @@
             "Sapling\\Config\\": "config/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
 }
