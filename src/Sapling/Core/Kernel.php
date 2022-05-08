@@ -14,22 +14,22 @@ class Kernel
      *  The controller class to be called
      *  @var string
      */
-    private static string $controller;
+    private static $controller;
     /**
      *  The function of the controller to be called
      *  @var string
      */
-    private static string $function;
+    private static $function;
     /**
      *  The parameters of the function being called
      *  @var array
      */
-    private static array $parameters;
+    private static $parameters;
     /**
      *  A flag to check the run() method
      *  @var bool
      */
-    private static bool $isRunned = FALSE;
+    private static $isRunned = FALSE;
 
     /**
      *  Sets the Kernel properties

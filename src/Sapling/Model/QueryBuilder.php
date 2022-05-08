@@ -105,7 +105,7 @@ class QueryBuilder
     {
         if ($this->qbTable === "") {
             Debug::debugClass("Table not set");
-            return;
+            return null;
         }
         $query = "SELECT * FROM `{$this->qbTable}` {$this->qbJoin} {$this->qbWhere['where']} {$this->qbOrder} {$this->qbLimit}";
         $_SESSION['QueryBuilder']['lastQuery'] = $query;
@@ -125,7 +125,7 @@ class QueryBuilder
     {
         if ($this->qbTable === "") {
             Debug::debugClass("Table not set");
-            return;
+            return null;
         }
         $query = "SELECT";
         if ($backticks) {
@@ -152,15 +152,15 @@ class QueryBuilder
      *  @param array $columns The columns of a table
      *  @param array $values The values corresponding to the columns
      */
-    protected function insert(array $columns, array $values)
+    protected function insert(array $columns, array $values): PDOStatement
     {
         if ($this->qbTable === "") {
             Debug::debugClass("Table not set");
-            return;
+            return null;
         }
         if (count($columns) !== count($values)) {
             Debug::debugClass('Columns length should be equal to values length');
-            return;
+            return null;
         }
         $bindings = [];
         for ($i = 0, $len = count($values); $i < $len; ++$i) {
@@ -180,19 +180,19 @@ class QueryBuilder
      *  @param array $columns The columns to update
      *  @param array $values The corresponding values to the given columns
      */
-    protected function update(array $columns, array $values)
+    protected function update(array $columns, array $values): PDOStatement
     {
         if ($this->qbTable === "") {
             Debug::debugClass('Table not set');
-            return;
+            return null;
         }
         if (count($columns) !== count($values)) {
             Debug::debugClass('Columns length should be equal to values length');
-            return;
+            return null;
         }
         if ($this->qbWhere['where'] === "") {
             Debug::debugClass('Where clause should not be empty when updating data');
-            return;
+            return null;
         }
         $query = "UPDATE `{$this->qbTable}` SET `" . implode("` = ?,`", $columns) . "` = ? {$this->qbWhere['where']}";
         for ($i = 0, $len = count($this->qbWhere['values']); $i < $len; ++$i) {
@@ -208,15 +208,15 @@ class QueryBuilder
      * 
      *  Delete a specific row in a table
      */
-    protected function delete()
+    protected function delete(): PDOStatement
     {
         if ($this->qbTable === "") {
             Debug::debugClass('Table not set');
-            return;
+            return null;
         }
         if ($this->qbWhere['where'] === "") {
             Debug::debugClass('Where clause should not be empty when deleting data');
-            return;
+            return null;
         }
         $query = "DELETE FROM `{$this->qbTable}` {$this->qbWhere['where']}";
         $_SESSION['QueryBuilder']['lastQuery'] = $query;
@@ -242,7 +242,7 @@ class QueryBuilder
      *  @param string $table The table to join
      *  @param string $condition The on condition
      */
-    protected function join(string $joinType, string $table, string $condition)
+    protected function join(string $joinType, string $table, string $condition): bool
     {
         $joinType = strtoupper($joinType);
         if ($joinType === "INNER" || $joinType === "LEFT" || $joinType === "RIGHT" || $joinType === "OUTER") {
@@ -250,8 +250,10 @@ class QueryBuilder
                 $joinType = "FULL OUTER";
             }
             $this->qbJoin .= "{$joinType} JOIN {$table} ON {$condition}";
+            return true;
         } else {
             Debug::debugClass('Invalid join type');
+            return false;
         }
     }
     /**
@@ -260,11 +262,11 @@ class QueryBuilder
      *  A method to set the where clause manually.
      *  @param string $where The where clause setted by user
      */
-    protected function whereManual(string $where, array $value)
+    protected function whereManual(string $where, array $value): bool
     {
         if (!preg_match("/[?]+/", $where)) {
             Debug::debugClass('Manual where clause must always be binded by ?');
-            return;
+            return false;
         }
         $totalBindings = 0;
         for ($i = 0, $len = strlen($where); $i < $len; ++$i) {
@@ -274,10 +276,11 @@ class QueryBuilder
         }
         if ($totalBindings !== count($value)) {
             Debug::debugClass('All the bindings must equal to the number of values');
-            return;
+            return false;
         }
         $this->qbWhere['where'] = $where;
         $this->qbWhere['values'] = $value;
+        return true;
     }
     /**
      *  Where Specific
@@ -289,11 +292,11 @@ class QueryBuilder
      *  @param string $operator The operator to use
      *  @param string $prependLogical The logical operator to use 
      */
-    protected function whereSpecific(string $column, mixed $value, string $operator, bool $and = true)
+    protected function whereSpecific(string $column, mixed $value, string $operator, bool $and = true): bool
     {
         if (is_iterable($value) || is_callable($value) || is_object($value)) {
             Debug::debugClass('Value should not be an array, function or an object');
-            return;
+            return false;
         }
         $prependLogical = $and ? "AND" : "OR";
         if ($this->qbWhere['where'] === "") {
@@ -302,6 +305,7 @@ class QueryBuilder
             $this->qbWhere['where'] = " {$prependLogical} {$column} {$operator} ?";
         }
         $this->qbWhere['values'][] = $value;
+        return true;
     }
     /**
      *  Where Many
@@ -312,16 +316,17 @@ class QueryBuilder
      *  @param string $operator The operator to use in where clause
      *  @param bool $and Tells whether to use AND or OR
      */
-    protected function whereMany(array $columns, array $values, string $operator = "=", bool $and = true)
+    protected function whereMany(array $columns, array $values, string $operator = "=", bool $and = true): bool
     {
         if (count($columns) !== count($values)) {
             Debug::debugClass('Columns length is not equal to values length');
-            return;
+            return false;
         }
         $seperator = $and ? "AND" : "OR";
         $this->qbWhere['where'] = "WHERE " . implode(" {$operator} ? {$seperator} ", $columns);
         $this->qbWhere['where'] .= " {$operator} ? ";
         $this->qbWhere['values'] = $values;
+        return true;
     }
     /**
      *  Order

@@ -29,8 +29,10 @@ class Controller
         }
         if (file_exists(Directories::APP_VIEW . $view_dir)) {
             require_once Directories::APP_VIEW . $view_dir;
+            return true;
         } else {
             require_once Routes::DEFAULT_ERROR_PAGE;
+            return false;
         }
     }
     /**
@@ -54,7 +56,9 @@ class Controller
                 $filename = $name;
             }
             $this->data[$filename] = new $classfilename; // Instantiate
+            return true;
         }
+        return false;
     }
     // Set properties dynamically
     public function __set($name, $value)

@@ -13,7 +13,7 @@ class Io
      *  @param string $encoding
      *  @return string
      */
-    function esc(string $message, int $flags = ENT_QUOTES, string $encoding = 'UTF-8')
+    function esc(string $message, int $flags = ENT_QUOTES, string $encoding = 'UTF-8'): string
     {
         return htmlspecialchars($message, $flags, $encoding);
     }
@@ -26,7 +26,7 @@ class Io
      *  @param string $name
      *  @param int $filter
      */
-    function input(int $type, string $name, int $filter = FILTER_DEFAULT)
+    function input(int $type, string $name, int $filter = FILTER_DEFAULT): mixed
     {
         $res = "";
         $res = filter_input($type, $name, $filter);

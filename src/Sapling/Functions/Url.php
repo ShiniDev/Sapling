@@ -7,7 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Url
 {
-    private static ?Request $request = NULL;
+    /**
+     * @var Symfony\Component\HttpFoundation\Request
+     */
+    private static $request = NULL;
 
     private static function createRequest(): void
     {
@@ -72,14 +75,6 @@ class Url
             $parameters = array_filter($parameters, 'strlen');
             // Re-adjust index values, clearing empty parameters does not fix index values
             $parameters = array_values($parameters);
-            // Replace + to space
-            for ($i = 0, $len = count($parameters); $i < $len; ++$i) {
-                for ($j = 0, $lenk = strlen($parameters[$i]); $j < $lenk; ++$j) {
-                    if ($parameters[$i][$j] === '+') {
-                        $parameters[$i][$j] = ' ';
-                    }
-                }
-            }
         }
         return $parameters;
     }
