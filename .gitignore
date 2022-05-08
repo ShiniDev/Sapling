@@ -1,3 +1,4 @@
 /config/database.json
 /vendor/
 .env
+.vscode

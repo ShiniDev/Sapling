@@ -9,10 +9,10 @@ class Test extends SaplingController
     public function __construct()
     {
         parent::__construct();
-        // $this->loadModel('TestModel');
+        $this->loadModel('testmodel');
     }
     public function index()
     {
-        $this->loadView("index.php");
+        $this->loadView("index");
     }
 }

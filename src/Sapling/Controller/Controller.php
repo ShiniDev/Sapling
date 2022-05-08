@@ -27,6 +27,7 @@ class Controller
         {
             $view_dir .= '.php';
         }
+        $view_dir = $this->getCaseInsensitiveFilename(Directories::APP_VIEW, $view_dir);
         if (file_exists(Directories::APP_VIEW . $view_dir)) {
             require_once Directories::APP_VIEW . $view_dir;
             return true;
@@ -46,6 +47,7 @@ class Controller
         {
             $model_dir .= '.php';
         }
+        $model_dir = $this->getCaseInsensitiveFilename(Directories::APP_MODEL, $model_dir);
         if (file_exists(Directories::APP_MODEL . $model_dir)) {
             // require_once Directories::APP_MODEL . $model_dir;
             $filename = explode('/', $model_dir);
@@ -79,5 +81,18 @@ class Controller
             E_USER_NOTICE
         );
         return null;
+    }
+
+    private function getCaseInsensitiveFilename(string $dir, string $filename)
+    {
+        $filename = strtolower($filename);
+        $files = scandir($dir);
+        for ($i = 2, $len = count($files); $i < $len; ++$i) {
+            if ($filename == strtolower($files[$i])) {
+                $filename = $files[$i];
+                break;
+            }
+        }
+        return $filename;
     }
 }
